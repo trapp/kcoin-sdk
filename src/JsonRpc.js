@@ -1,11 +1,13 @@
+let https = require('https');
 let http = require('http');
 
 class JsonRpc {
 
-    constructor ({host, port, timeout = 30000}) {
+    constructor ({host, port, timeout = 30000, ssl = false}) {
         this.host = host;
         this.port = port;
         this.timeout = timeout;
+        this.http = ssl ? https : http;
     }
 
     request (method, parameters = {}) {
@@ -34,7 +36,7 @@ class JsonRpc {
 
             // Now we'll make a request to the server
             let cbCalled = false;
-            let request = http.request(requestOptions);
+            let request = this.http.request(requestOptions);
 
             // start request timeout timer
             let reqTimeout = setTimeout(function () {

@@ -28,7 +28,8 @@ console.log(tx.hash, 'sent');
 let rpc = new kcoin.Rpc({
         host: 'mcp.kcoin.website',
         port: '443',
-        timeout: 5000
+        timeout: 5000,
+	ssl: true
 });
 console.log(await rpc.request('mempool_getStats'));
 ```
